@@ -42,7 +42,7 @@ class Chat:
         return response
 
 # Fonction principale Streamlit
-def main():
+def App():
     st.title("Application")
     
     # Section de téléchargement
@@ -76,7 +76,7 @@ def main():
         st.write("Réponse du modèle:", response)
 
 if __name__ == '__main__':
-    main()
+    App()
 
   
  
