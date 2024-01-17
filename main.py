@@ -1,55 +1,16 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-class Search:
-    def __init__(self, data_dict):
-        """Initialise la classe avec le dictionnaire de données."""
-        self.data_dict = data_dict
-        self.vectorizer = TfidfVectorizer()
-        self.vectorized_data = self.vectorize_data()
-
-    def vectorize_data(self):
-        """
-        Transforme les données du dictionnaire en représentation vectorielle
-        pour la recherche vectorielle en utilisant le TF-IDF.
-        """
-        self.vectorizer()
-        return vectorized_data
-
-    def search(self, query_text, top_k=5):
-        """
-        Effectue une recherche vectorielle sur le dictionnaire de données
-        en utilisant la similarité cosinus pour identifier les séries pertinentes.
-
-        :param query_text: Le texte de la requête de l'utilisateur.
-        :param top_k: Le nombre de séries les plus pertinentes à retourner.
-        :return: Une liste des identifiants des séries les plus pertinentes.
-        """
-        # Vectorisez la requête de l'utilisateur
-        query_vector = self.vectorizer.transform([query_text])
-
-        # Calculez la similarité cosinus entre le vecteur de requête et les vecteurs des séries
-        similarities = cosine_similarity(query_vector, self.vectorized_data).flatten()
-
-        # Triez les indices des séries en fonction de leur similarité
-        sorted_indices = np.argsort(similarities)[::-1]
-
-        # Sélectionnez les top_k séries les plus pertinentes
-        top_k_series = [list(self.data_dict.keys())[index] for index in sorted_indices[:top_k]]
-
-        return top_k_series
-
 # Download series from API 
 class Download:
-    def __init__(self, api_url):
+    def __init__(self, user_json):
         """Initialise la classe avec l'URL de l'API."""
-        self.api_url = api_url
+        self.user_data = user_json
 
-    def download(self, series_ids):
+    def download(self):
         """
-        Permet de télécharger les séries identifiées grâce à la classe SearchDB
-        depuis une API publique (exemple INSEE).
+        Permet de télécharger les séries déposé par l'utilisateur.
+        Ajouter des tests pour split ou summarize les données.
+        Return JSON format
         """
-        # Logique de téléchargement depuis l'API ici
+        # Logique de téléchargement des données de l'utilisateur via drag and drop
         return json_data
 
 # Load JSON inside LLM
