@@ -14,28 +14,29 @@ class Download:
         return json_data
 
 # Load user data inside LLM
-class Train:
+class PromptJson:
     def __init__(self, model):
         """Initialise la classe avec un modèle de la plateforme HuggingFace."""
         self.model = model
 
-    def train(self, json_data):
+    def prompt_json(self, json_data):
         """
         Permet d'ajouter les données dans le prompt afin d'optimiser la requête.
         Ajouter un cadre, une méthodologie et des consignes claires. 
         """
         # Logique d'ajout des données au modèle ici
-        return trained_model
+        return prompt_data
 
 # Chat with LLM about your data 
 class Chat:
     def __init__(self, model):
-        """Initialise la classe avec le modèle entrainé."""
+        """Initialise la classe avec un modèle de la plateforme HuggingFace."""
         self.model = model
 
     def chat(self, message):
         """
         Permet d'interagir avec un LLM sur les données JSON importées.
+        Utiliser le prompt contenant le json pour initialiser le chatbot. 
         Output doit ressembler à une analyse de données avec contexte, évolution, graphiques, tableaux, ...
         """
         # Logique d'interaction avec le modèle et génération de la réponse
@@ -59,9 +60,9 @@ def App():
     st.header("Entraînement du modèle")
     if st.button("Commencer l'entraînement"):
         # Initialiser la classe d'entraînement avec le modèle
-        trainer = Train(model)
+        trainer = PromptJson(model)
         # Appeler la méthode d'entraînement avec les données téléchargées
-        trained_model = trainer.train(downloaded_data)
+        ouput = trainer.prompt_json(downloaded_data)
         st.success("Entraînement terminé avec succès!")
 
     # Section de chat
@@ -69,7 +70,7 @@ def App():
     user_message = st.text_input("Entrez votre message:")
     if st.button("Envoyer"):
         # Initialiser la classe de chat avec le modèle entraîné
-        chatter = Chat(trained_model)
+        chatter = Chat(ouput)
         # Appeler la méthode de chat avec le message de l'utilisateur
         response = chatter.chat(user_message)
         st.success("Réponse générée avec succès!")
@@ -77,7 +78,3 @@ def App():
 
 if __name__ == '__main__':
     App()
-
-  
- 
-
